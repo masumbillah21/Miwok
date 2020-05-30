@@ -18,9 +18,14 @@ package com.example.android.miwok;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    TextView number, colors, family, phrases;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,19 +33,43 @@ public class MainActivity extends AppCompatActivity {
 
         // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_main);
+        number = (TextView) findViewById(R.id.numbers);
+        colors = (TextView) findViewById(R.id.colors);
+        family = (TextView) findViewById(R.id.family);
+        phrases = (TextView) findViewById(R.id.phrases);
+
+        number.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent numIntent = new Intent(MainActivity.this, NumberActivity.class);
+                startActivity(numIntent);
+            }
+        });
+        colors.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent colorntent = new Intent(MainActivity.this, ColorActivity.class);
+                startActivity(colorntent);
+            }
+        });
+        family.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent familyIntent = new Intent(MainActivity.this, FamilyActivity.class);
+                startActivity(familyIntent);
+            }
+        });
+        phrases.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent phrasesIntent = new Intent(MainActivity.this, PhrasesActivity.class);
+                startActivity(phrasesIntent);
+            }
+        });
+
+
     }
 
-    public void openNumberList(View view){
-        Intent intent = new Intent(this, NumberActivity.class);
-        startActivity(intent);
-    }
-    public void openFamilyList(View view){
 
-    }
-    public void openColorList(View view){
 
-    }
-    public void openPhrasesList(View view){
-
-    }
 }
