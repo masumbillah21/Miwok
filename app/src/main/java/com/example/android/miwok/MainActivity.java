@@ -15,57 +15,33 @@
  */
 package com.example.android.miwok;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
-
-import java.util.ArrayList;
+import com.google.android.material.tabs.TabLayout;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-    TextView number, colors, family, phrases;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_main);
-        number = (TextView) findViewById(R.id.numbers);
-        colors = (TextView) findViewById(R.id.colors);
-        family = (TextView) findViewById(R.id.family);
-        phrases = (TextView) findViewById(R.id.phrases);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 
-        number.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent numIntent = new Intent(MainActivity.this, NumberActivity.class);
-                startActivity(numIntent);
-            }
-        });
-        colors.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent colorntent = new Intent(MainActivity.this, ColorActivity.class);
-                startActivity(colorntent);
-            }
-        });
-        family.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent familyIntent = new Intent(MainActivity.this, FamilyActivity.class);
-                startActivity(familyIntent);
-            }
-        });
-        phrases.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent phrasesIntent = new Intent(MainActivity.this, PhrasesActivity.class);
-                startActivity(phrasesIntent);
-            }
-        });
+        // Create an adapter that knows which fragment should be shown on each page
+        CategoryAdapter adapter = new CategoryAdapter(this, getSupportFragmentManager());
+
+        // Set the adapter onto the view pager
+        assert viewPager != null;
+        viewPager.setAdapter(adapter);
+
+        // Find the tab layout that shows the tabs
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+
+
+        assert tabLayout != null;
+        tabLayout.setupWithViewPager(viewPager);
 
 
     }
